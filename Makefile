@@ -1,5 +1,6 @@
 CC = g++
 EXT = exe
+OBJ = main.cpp rendering/Screen.cpp rendering/Screen.h
 
 # 32bit version
 SDL_LIB_RELATIVE = ./dependencies/SDL2/lib
@@ -10,11 +11,12 @@ OPTIONS = -lmingw32 -lSDL2main -lSDL2
 execute: build run
 
 build: main.cpp
-	$(CC) -Wall main.cpp -I$(SDL_INCLUDE_RELATIVE) -L$(SDL_LIB_RELATIVE) $(OPTIONS) -o main.$(EXT)
+	$(CC) -Wall $(OBJ) -I$(SDL_INCLUDE_RELATIVE) -L$(SDL_LIB_RELATIVE) $(OPTIONS) -o build/main.$(EXT)
 	
-
-run: main.$(EXT)
-	./main.$(EXT)
+run: ./build/main.$(EXT)
+	build/main.$(EXT)
 
 clean: 
-	rm *.$(EXT)
+	rm build/*.$(EXT)
+
+.PHONY: clean
