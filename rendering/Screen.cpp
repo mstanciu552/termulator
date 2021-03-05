@@ -1,6 +1,7 @@
 #include <iostream>
+#include <string>
 #include "Screen.h"
-#include "Font.h"
+
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -37,7 +38,9 @@ void Screen::handle_events() {
 				break;
 			} else if (event.type == SDL_TEXTINPUT) {
 				// Getting user input here
+				text_input += event.text.text;
 				printf("%s", event.text.text);
+				font->update(text_input.c_str());
 			}
 		}
 	}
@@ -53,9 +56,8 @@ void Screen::render() {
 	SDL_SetRenderDrawColor(renderer, BLACK->r, BLACK->g, BLACK->b, BLACK->a);
 	SDL_RenderClear(renderer);
 
-	char* string_to_render = "testing";
-	Font* font = new Font(renderer, string_to_render);
-	font->init("fonts/terminess.ttf");
+	font = new Font(renderer, 10, 10);
+	font->init("fonts/terminess.ttf", text_input.c_str());
 
 	SDL_RenderPresent(renderer);
 }

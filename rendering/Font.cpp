@@ -1,25 +1,38 @@
 #include "Font.h"
 
-Font::Font(SDL_Renderer* renderer, char* message): renderer(renderer), message(message) {}
-Font::~Font() {}
-
-void Font::init(const char* font_path) {
-    font = TTF_OpenFont(font_path, 400);
-  	SDL_Color WHITE = {255, 255, 255, 255};
-    
-    render(message, WHITE);
-
+Font::Font(SDL_Renderer* renderer, int width, int height): renderer(renderer), width(width), height(height) {}
+Font::~Font() {
     clean();
 }
 
-void Font::render(char* message, SDL_Color color) {
-    SDL_Surface* surface = TTF_RenderText_Solid(font, message, color);
+void Font::init(const char* font_path, const char* message) {
+    font = TTF_OpenFont(font_path, 30);
+    
+    render(message);
+
+    // clean();
+}
+
+void Font::render(const char* message) {
+
+
+  	SDL_Color color = {255, 255, 255, 255};
+    SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(font, message, color, 820);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	SDL_FreeSurface(surface);
 
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+    SDL_Rect dstrect = { 0, 0, width, height };
+
+	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 	SDL_DestroyTexture(texture);
+
+    SDL_RenderPresent(renderer);
+}
+
+void Font::update(const char* message) {
+    render(message);
 }
 
 void Font::clean() {

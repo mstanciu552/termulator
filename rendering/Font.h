@@ -5,14 +5,15 @@ class Font {
     private:
         SDL_Renderer* renderer;
         TTF_Font* font = nullptr;
-        char* message;
+        int width, height;
     public:
-        Font(SDL_Renderer* renderer, char* message);
+        Font(SDL_Renderer* renderer, int width, int height);
         ~Font();
 
-        void init(const char* font_path);
+        void init(const char* font_path, const char* message);
 
-        void render(char* message, SDL_Color color);
+        void render(const char* message);
+        void update(const char* message);
 
         void clean();
 };

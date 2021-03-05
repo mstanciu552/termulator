@@ -1,6 +1,7 @@
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-
+#include "Font.h"
 
 class Screen {
     public:
@@ -18,4 +19,6 @@ class Screen {
         bool isRunning;
         SDL_Window* window;
         SDL_Renderer* renderer;
+        Font* font;
+        std::string text_input;
 };
