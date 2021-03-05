@@ -1,10 +1,5 @@
-#include <iostream>
 #include <string>
 #include "Screen.h"
-
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 
 // Color struct
 typedef struct Color {
@@ -19,6 +14,7 @@ Screen::~Screen() {
 
 void Screen::init(const char* title, int x, int y, int width, int height, bool fullscreen) {
     window = SDL_CreateWindow(title, x, y, width, height, fullscreen);
+	command = new Command();
 	SDL_StartTextInput();
 	
 	render();
@@ -47,7 +43,13 @@ void Screen::handle_events() {
 						text_input.pop_back();
 						font->delete_last(text_input.c_str());
 					}
-            	}
+            	} else if (event.key.keysym.sym == SDLK_RETURN) {
+					// TODO Separate current directory from text
+					command->run(text_input);
+					text_input = "";
+					font->update(text_input.c_str());
+					cursor->update(1, 5);
+				}
 			}
 		}
 	}
@@ -69,11 +71,9 @@ void Screen::render() {
 
 	font = new Font(renderer, 10, 10, cursor);
 	font->init("fonts/terminess.ttf", text_input.c_str());
-	
 	cursor->update(font->getWidth(text_input.c_str()), 5);
-
-	SDL_RenderPresent(renderer);
 }
+
 
 // Cleaning Memory
 void Screen::clean() {

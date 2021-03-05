@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "Cursor.h"
+#include <iostream>
 
 class Font {
     private:
@@ -23,4 +24,5 @@ class Font {
         TTF_Font* getFont();
         int getWidth(const char* message);
         int getHeight(const char* message);
+        std::string getMessage();
 };

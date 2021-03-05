@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "Font.h"
+#include "../terminal/Command.h"
 
 class Screen {
     public:
@@ -21,5 +22,6 @@ class Screen {
         SDL_Renderer* renderer;
         Cursor* cursor;
         Font* font;
-        std::string text_input;
+        Command* command;
+        std::string text_input = command->execute("pwd") + '>';
 };

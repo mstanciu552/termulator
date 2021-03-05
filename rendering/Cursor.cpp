@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include "Cursor.h"
 
 Cursor::Cursor(SDL_Renderer* renderer, int x, int y, int w, int h): renderer(renderer), x(x), y(y), width(w), height(h) {}

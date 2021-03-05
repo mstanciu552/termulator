@@ -1,5 +1,4 @@
 #include "Font.h"
-#include <iostream>
 
 Font::Font(SDL_Renderer* renderer, int width, int height, Cursor* cursor): renderer(renderer), width(width), height(height), cursor(cursor) {}
 Font::~Font() {
