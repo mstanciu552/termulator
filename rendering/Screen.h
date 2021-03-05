@@ -19,6 +19,7 @@ class Screen {
         bool isRunning;
         SDL_Window* window;
         SDL_Renderer* renderer;
+        Cursor* cursor;
         Font* font;
         std::string text_input;
 };

@@ -19,7 +19,7 @@ Screen::~Screen() {
 
 void Screen::init(const char* title, int x, int y, int width, int height, bool fullscreen) {
     window = SDL_CreateWindow(title, x, y, width, height, fullscreen);
-    SDL_StartTextInput();
+	SDL_StartTextInput();
 	
 	render();
 	handle_events();
@@ -39,14 +39,15 @@ void Screen::handle_events() {
 			} else if (event.type == SDL_TEXTINPUT) {
 				// Getting user input here
 				text_input += event.text.text;
-				printf("%s", event.text.text);
 				font->update(text_input.c_str());
+				cursor->update(font->getWidth(text_input.c_str()) + 15, 5);
 			} else if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_BACKSPACE) {
-					text_input.pop_back();
-					printf("%s", text_input.c_str());
-					font->delete_last(text_input.c_str());
-				}
+					if (text_input.size() > 0) {
+					    text_input.pop_back();
+					    font->delete_last(text_input.c_str());
+					}
+            	}
 			}
 		}
 	}
@@ -56,14 +57,20 @@ void Screen::update() {}
 
 void Screen::render() {
     renderer = SDL_CreateRenderer(window, -1, 0);
+    cursor = new Cursor(renderer, 1, 1, 10, 20);
 
-    Color* BLACK = new Color(30, 30, 30, 255);
+	
+	Color* BLACK = new Color(30, 30, 30, 255);
 
 	SDL_SetRenderDrawColor(renderer, BLACK->r, BLACK->g, BLACK->b, BLACK->a);
 	SDL_RenderClear(renderer);
 
-	font = new Font(renderer, 10, 10);
+	cursor->draw();
+
+	font = new Font(renderer, 10, 10, cursor);
 	font->init("fonts/terminess.ttf", text_input.c_str());
+	
+	cursor->update(font->getWidth(text_input.c_str()), 5);
 
 	SDL_RenderPresent(renderer);
 }

@@ -7,7 +7,7 @@
 
 int main(int argv, char** args) {
 	const int WIDTH = 820, HEIGHT = 640;
-
+	
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		printf("Error initializing SDL %s", SDL_GetError());
 	

@@ -1,7 +1,12 @@
 CC = g++
 EXT = exe
-OBJ = main.cpp rendering/Screen.cpp rendering/Screen.h rendering/Font.cpp rendering/Font.h
-
+OBJ = main.cpp \
+	rendering/Screen.cpp \
+	rendering/Screen.h \
+	rendering/Font.cpp \
+	rendering/Font.h \
+	rendering/Cursor.h \
+	rendering/Cursor.cpp
 # 32bit version
 SDL_LIB_RELATIVE = ./dependencies/SDL2/lib
 SDL_INCLUDE_RELATIVE = ./dependencies/SDL2/include
