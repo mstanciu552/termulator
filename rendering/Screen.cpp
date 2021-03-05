@@ -41,6 +41,12 @@ void Screen::handle_events() {
 				text_input += event.text.text;
 				printf("%s", event.text.text);
 				font->update(text_input.c_str());
+			} else if (event.type == SDL_KEYDOWN) {
+				if (event.key.keysym.sym == SDLK_BACKSPACE) {
+					text_input.pop_back();
+					printf("%s", text_input.c_str());
+					font->delete_last(text_input.c_str());
+				}
 			}
 		}
 	}

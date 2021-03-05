@@ -14,6 +14,7 @@ class Font {
 
         void render(const char* message);
         void update(const char* message);
+        void delete_last(const char* message);
 
         void clean();
 };
