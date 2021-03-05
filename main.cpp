@@ -5,6 +5,9 @@
 // Rendering
 #include "rendering/Screen.h"
 
+// Terminal
+#include "terminal/Command.h"
+
 int main(int argv, char** args) {
 	const int WIDTH = 820, HEIGHT = 640;
 	
@@ -14,10 +17,13 @@ int main(int argv, char** args) {
 	if (TTF_Init() != 0)
 		printf("Error loading the Font: %s", TTF_GetError());
 
-	Screen* screen = new Screen();
+	// Screen* screen = new Screen();
 
-	screen->init("Termulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, false);
+	// screen->init("Termulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, false);
 
+	Command* command = new Command();
+
+	command->run("ls -la");
 
 	return 0;
 }

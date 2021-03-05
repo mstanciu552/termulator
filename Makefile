@@ -6,7 +6,10 @@ OBJ = main.cpp \
 	rendering/Font.cpp \
 	rendering/Font.h \
 	rendering/Cursor.h \
-	rendering/Cursor.cpp
+	rendering/Cursor.cpp \
+	terminal/Command.h \
+	terminal/Command.cpp
+	
 # 32bit version
 SDL_LIB_RELATIVE = ./dependencies/SDL2/lib
 SDL_INCLUDE_RELATIVE = ./dependencies/SDL2/include

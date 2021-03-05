@@ -44,8 +44,8 @@ void Screen::handle_events() {
 			} else if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_BACKSPACE) {
 					if (text_input.size() > 0) {
-					    text_input.pop_back();
-					    font->delete_last(text_input.c_str());
+						text_input.pop_back();
+						font->delete_last(text_input.c_str());
 					}
             	}
 			}
