@@ -1,6 +1,8 @@
 CC = g++
 EXT = exe
 OBJ = main.cpp \
+	Terminal.cpp \
+	Terminal.h \
 	rendering/Screen.cpp \
 	rendering/Screen.h \
 	rendering/Font.cpp \
